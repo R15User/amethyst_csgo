@@ -22,13 +22,15 @@ DWORD WINAPI initialize(void* instance)
 
 	while (!GetAsyncKeyState(VK_END))
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	
+	FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 }
 
 
 
 BOOL WINAPI release()
 {
-
+	hooks::restore();
 	return TRUE;
 }
 
